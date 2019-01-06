@@ -15,6 +15,7 @@ import com.zadam.maintenencehelper.maintenanceHelper.model.Detail;
 import com.zadam.maintenencehelper.maintenanceHelper.model.strava.StravaToken;
 import com.zadam.maintenencehelper.maintenanceHelper.model.strava.StravaDetail;
 import com.zadam.maintenencehelper.maintenanceHelper.mapper.StravaTokenToTokenMapper;
+import com.zadam.maintenencehelper.maintenanceHelper.mapper.StravaDetailToDetailMapper;
 
 @Service
 public class StravaService {
@@ -38,7 +39,7 @@ public class StravaService {
 
       StravaToken stravaToken = restTemplate.postForObject(stravaTokenResourceUrl, null, StravaToken.class);
       // TODO: null/error checking
-      return StravaTokenToTokenMapper.StravaTokenToToken(stravaToken);
+      return StravaTokenToTokenMapper.stravaTokenToToken(stravaToken);
     }
 
     private HttpHeaders createHttpHeaders(String token)
@@ -66,9 +67,7 @@ public class StravaService {
 
       StravaDetail stravaDetail = response.getBody();
 
-      Detail detail = new Detail();
-
-      detail.setFirstName(stravaDetail.getFirstname());
+      Detail detail = StravaDetailToDetailMapper.stravaDetailToDetail(stravaDetail);
 
       return detail;
     }

@@ -6,7 +6,7 @@ import com.zadam.maintenencehelper.maintenanceHelper.model.strava.StravaToken;
 import com.zadam.maintenencehelper.maintenanceHelper.model.strava.StravaAthlete;
 
 public class StravaTokenToTokenMapper {
-  public static Token StravaTokenToToken(StravaToken stravaToken) {
+  public static Token stravaTokenToToken(StravaToken stravaToken) {
     Token token = new Token(stravaToken.getAccess_token(), stravaToken.getRefresh_token());
 
     token.setAthlete(stravaAthleteToAthlete(stravaToken.getAthlete()));
